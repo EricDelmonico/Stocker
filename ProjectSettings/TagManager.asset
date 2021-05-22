@@ -11,6 +11,8 @@ TagManager:
   - WPMeat
   - WPAisle
   - Detection
+  - Banana
+  - Pork
   layers:
   - Default
   - TransparentFX
