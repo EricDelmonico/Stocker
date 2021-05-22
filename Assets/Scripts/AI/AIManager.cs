@@ -52,7 +52,7 @@ public class AIManager : MonoBehaviour
         }
 
         //Triggers the animator
-        if (playerSpotted)
+        if (playerSpotted || PlayerStealth.running)
             managerAnimator.SetBool("PlayerSpotted", true);
         else
             managerAnimator.SetBool("PlayerSpotted", false);
