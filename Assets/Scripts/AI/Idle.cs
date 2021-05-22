@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Idle : StateMachineBehaviour
 {
@@ -10,6 +11,8 @@ public class Idle : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         manager = animator.gameObject;
+
+        manager.GetComponent<NavMeshAgent>().isStopped = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -22,7 +25,7 @@ public class Idle : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //animator.SetBool("IdleSpot", false);
+        manager.GetComponent<NavMeshAgent>().isStopped = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
