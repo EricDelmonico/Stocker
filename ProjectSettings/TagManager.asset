@@ -10,6 +10,8 @@ TagManager:
   - WPProduce
   - WPMeat
   - WPAisle
+  - Banana
+  - Pork
   layers:
   - Default
   - TransparentFX
