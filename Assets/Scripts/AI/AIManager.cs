@@ -43,16 +43,20 @@ public class AIManager : MonoBehaviour
             Debug.DrawRay(transform.position, playerPos.position - transform.position, Color.red);
 
             RaycastHit hit;
-            Physics.Raycast(transform.position, playerPos.position - transform.position, out hit);
-             
-            if (hit.transform == playerPos)
+            if(Physics.Raycast(transform.position, playerPos.position - transform.position, out hit))
             {
-                playerSpotted = true;
+
+                if(hit.collider.CompareTag("Detection"))
+                {
+                    playerSpotted = true;
+                }
             }
+
+            
         }
 
         //Triggers the animator
-        if (playerSpotted)
+        if (playerSpotted || PlayerStealth.running)
             managerAnimator.SetBool("PlayerSpotted", true);
         else
             managerAnimator.SetBool("PlayerSpotted", false);

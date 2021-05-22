@@ -10,6 +10,7 @@ TagManager:
   - WPProduce
   - WPMeat
   - WPAisle
+  - Detection
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,6 @@ TagManager:
   - UI
   - DetectionTarget
   - Enemy Camera
-  - 
   - 
   - 
   - 
