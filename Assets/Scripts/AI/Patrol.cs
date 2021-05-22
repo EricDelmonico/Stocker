@@ -66,7 +66,7 @@ public class Patrol : StateMachineBehaviour
 
         currentTime = 0.0f;
 
-        transitionTime = Random.Range(1.0f, 5.0f);
+        transitionTime = Random.Range(10.0f, 30.0f);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -87,8 +87,8 @@ public class Patrol : StateMachineBehaviour
             managerManager.MoveToPosition(currentSetOfWP[currentWP].transform.position);
         }
 
-        Vector3 direction = currentSetOfWP[currentWP].transform.position - manager.transform.position;
-        manager.transform.rotation = Quaternion.Slerp(manager.transform.rotation, Quaternion.LookRotation(direction), 1.0f * Time.deltaTime);
+        //Vector3 direction = currentSetOfWP[currentWP].transform.position - manager.transform.position;
+        //manager.transform.rotation = Quaternion.Slerp(manager.transform.rotation, Quaternion.LookRotation(direction), 1.0f * Time.deltaTime);
 
         if (currentTime >= transitionTime)
             animator.SetBool("IdleSpot", true);
