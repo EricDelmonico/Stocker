@@ -18,11 +18,15 @@ public class Patrol : StateMachineBehaviour
 
 
     //What section the player is in
-    int currentSection = 2;
+    int currentSection = 0;
     GameObject[] currentSetOfWP;
 
     //Current waypoint
     int currentWP;
+
+    //Timer for idle state
+    float currentTime;
+    float transitionTime;
 
     private void Awake()
     {
@@ -31,6 +35,8 @@ public class Patrol : StateMachineBehaviour
         wayPointsProduce = GameObject.FindGameObjectsWithTag("WPProduce");
         wayPointsMeat = GameObject.FindGameObjectsWithTag("WPMeat");
         wayPointsAisle = GameObject.FindGameObjectsWithTag("WPAisle");
+
+        currentWP = 0;
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -39,8 +45,6 @@ public class Patrol : StateMachineBehaviour
         manager = animator.gameObject;
 
         managerManager = manager.GetComponent<AIManager>();
-
-        currentWP = 0;
 
         //Assigns the waypoints based on which section the player is in.
         switch (currentSection)
@@ -59,6 +63,10 @@ public class Patrol : StateMachineBehaviour
         }
 
         managerManager.MoveToPosition(currentSetOfWP[currentWP].transform.position);
+
+        currentTime = 0.0f;
+
+        transitionTime = Random.Range(1.0f, 5.0f);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -81,6 +89,11 @@ public class Patrol : StateMachineBehaviour
 
         Vector3 direction = currentSetOfWP[currentWP].transform.position - manager.transform.position;
         manager.transform.rotation = Quaternion.Slerp(manager.transform.rotation, Quaternion.LookRotation(direction), 1.0f * Time.deltaTime);
+
+        if (currentTime >= transitionTime)
+            animator.SetBool("IdleSpot", true);
+        else
+            currentTime += Time.deltaTime;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
