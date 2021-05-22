@@ -12,8 +12,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
     public class FirstPersonController : MonoBehaviour
     {
         [SerializeField] private bool m_IsWalking;
-        [SerializeField] private float m_WalkSpeed;
-        [SerializeField] private float m_RunSpeed;
+        [SerializeField] public float m_WalkSpeed;
+        [SerializeField] public float m_RunSpeed;
         [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
@@ -28,6 +28,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+
+        [SerializeField] private GameObject flashlight;
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -187,9 +189,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             if (m_CharacterController.velocity.magnitude > 0 && m_CharacterController.isGrounded)
             {
-                m_Camera.transform.localPosition =
-                    m_HeadBob.DoHeadBob(m_CharacterController.velocity.magnitude +
-                                      (speed*(m_IsWalking ? 1f : m_RunstepLenghten)));
+                Vector3 bobPos = m_HeadBob.DoHeadBob(m_CharacterController.velocity.magnitude +
+                                      (speed * (m_IsWalking ? 1f : m_RunstepLenghten)));
+                m_Camera.transform.localPosition = bobPos;
+                flashlight.transform.localPosition = (bobPos - new Vector3(0, .8f, 0)) * 2;
                 newCameraPosition = m_Camera.transform.localPosition;
                 newCameraPosition.y = m_Camera.transform.localPosition.y - m_JumpBob.Offset();
             }
