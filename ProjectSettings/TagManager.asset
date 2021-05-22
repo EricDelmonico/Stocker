@@ -7,6 +7,9 @@ TagManager:
   - Test
   - DropSpot
   - DropSpotTest
+  - WPProduce
+  - WPMeat
+  - WPAisle
   layers:
   - Default
   - TransparentFX
