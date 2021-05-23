@@ -10,4 +10,9 @@ public class Pork : Item
     {
         dropped = true;
     }
+
+    private void Start()
+    {
+        dropped = false;
+    }
 }

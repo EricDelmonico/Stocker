@@ -9,6 +9,11 @@ public class Gum : Item
     [SerializeField]
     private Transform finalChaseLocation;
 
+    private void Start()
+    {
+        dropped = false;
+    }
+
     public static bool dropped = false;
     protected override bool itemDropped => dropped;
     public override void DropItem()
