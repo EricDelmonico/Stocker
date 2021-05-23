@@ -23,6 +23,8 @@ public class Search : StateMachineBehaviour
         manager = animator.gameObject;
         managerManager = manager.GetComponent<AIManager>();
 
+        managerManager.PlaySound(Sounds.Search);
+
         lastPos = player.transform.position;
     }
 
