@@ -32,7 +32,7 @@ public class AIManager : MonoBehaviour
     bool playerSpotted;
 
     // AudioSource
-    public AudioSource jaredSource;
+    private AudioSource jaredSource;
 
     //Waypoints
     public GameObject[] produceWP;
@@ -47,6 +47,8 @@ public class AIManager : MonoBehaviour
     private AudioClip[] chaseSounds;
     [SerializeField]
     private AudioClip[] hearSounds;
+    [SerializeField]
+    private AudioClip[] gameOverSounds;
 
     private Dictionary<Sounds, AudioClip[]> allSounds;
 
@@ -109,14 +111,20 @@ public class AIManager : MonoBehaviour
         //Triggers the animator
         if (playerSpotted)
         {
-            managerAnimator.SetBool("PlayerSpotted", true);
-            PlaySound(Sounds.Chase);
+            if (!managerAnimator.GetBool("PlayerSpotted"))
+            {
+                managerAnimator.SetBool("PlayerSpotted", true);
+                PlaySound(Sounds.Chase);
+            }
         }
         else if ( PlayerStealth.running || 
             (PlayerStealth.walking && Vector3.Distance(transform.position, playerPos.position) < hearingRange))
         {
-            managerAnimator.SetBool("PlayerSpotted", true);
-            PlaySound(Sounds.Hear);
+            if (!managerAnimator.GetBool("PlayerSpotted"))
+            {
+                managerAnimator.SetBool("PlayerSpotted", true);
+                PlaySound(Sounds.Hear);
+            }
         }
         else
         {
