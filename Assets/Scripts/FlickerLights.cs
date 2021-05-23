@@ -2,26 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlickerLight : MonoBehaviour
+public class FlickerLights : MonoBehaviour
 {
     //Needed objects
-    Light spotLight;
-    public GameObject leftEye;
-    public GameObject rightEye;
+    protected Light spotLight;
 
     public float maxWaitTime;
     public float minWaitTime;
-    float currentTime = 0.0f;
-    float endTime;
+    protected float currentTime = 0.0f;
+    protected float endTime;
 
     public float maxFlickerTime;
     public float minFlickerTime;
 
-    bool playFlicker = true;
+    protected bool playFlicker = true;
 
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         spotLight = GetComponent<Light>();
         endTime = Random.Range(minWaitTime, maxWaitTime);
@@ -31,9 +29,9 @@ public class FlickerLight : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-     
+
         currentTime += Time.deltaTime;
 
         if (currentTime >= endTime)
@@ -46,38 +44,23 @@ public class FlickerLight : MonoBehaviour
                 StartCoroutine(Flicker());
         }
 
-        
 
-        
-            
+
+
+
     }
 
-    IEnumerator Flicker ()
+    protected virtual IEnumerator Flicker()
     {
-        
+
         while (playFlicker)
         {
             yield return new WaitForSeconds(Random.Range(minFlickerTime, maxFlickerTime));
 
             //Activate and deactives both the lights and the eyes
             spotLight.enabled = !spotLight.enabled;
-
-            activeEyes();
         }
 
     }
 
-    void activeEyes()
-    {
-        if (spotLight.enabled == false && playFlicker == false)
-        {
-            leftEye.SetActive(true);
-            rightEye.SetActive(true);
-        }
-        else
-        {
-            leftEye.SetActive(false);
-            rightEye.SetActive(false);
-        }
-    }
 }
