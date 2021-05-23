@@ -82,6 +82,8 @@ public class Patrol : StateMachineBehaviour
         currentTime = 0.0f;
 
         transitionTime = Random.Range(10.0f, 30.0f);
+
+        managerManager.StartCoroutine(managerManager.PlayPatrolSoundsPeriodically());
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -116,7 +118,7 @@ public class Patrol : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        managerManager.StopAllCoroutines();
     }
 
     private void CheckItems()
