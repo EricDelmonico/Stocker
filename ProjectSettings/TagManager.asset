@@ -17,6 +17,7 @@ TagManager:
   - DropSpotPork
   - DropSpotGum
   - Gum
+  - TutTrigger
   layers:
   - Default
   - TransparentFX
@@ -27,6 +28,7 @@ TagManager:
   - DetectionTarget
   - Enemy Camera
   - Pixelation
+  - 
   - 
   - 
   - 

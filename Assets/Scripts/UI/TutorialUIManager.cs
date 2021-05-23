@@ -9,6 +9,8 @@ public class TutorialUIManager : UIManagerBase
     protected override void Start()
     {
         base.Start();
+
+        FadeIn();
     }
 
     // Update is called once per frame
@@ -18,4 +20,6 @@ public class TutorialUIManager : UIManagerBase
     }
 
     public void ToMainMenu() => SceneManager.LoadScene(0);
+
+
 }

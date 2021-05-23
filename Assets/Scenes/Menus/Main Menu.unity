@@ -469,12 +469,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63816f86d960b6a4eb1781a5d1cfc34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftEye: {fileID: 1711916345}
-  rightEye: {fileID: 199319613}
   maxWaitTime: 4
   minWaitTime: 6
   maxFlickerTime: 0.01
   minFlickerTime: 0.2
+  leftEye: {fileID: 1711916345}
+  rightEye: {fileID: 199319613}
 --- !u!108 &140523935
 Light:
   m_ObjectHideFlags: 0
@@ -1056,7 +1056,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 812630303}
         m_TargetAssemblyTypeName: UIManagerBase, Assembly-CSharp
-        m_MethodName: Play
+        m_MethodName: Tutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1698,7 +1698,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 9f3d105335c545947a9cbc70dd0de931, type: 3}
-    m_FontSize: 39
+    m_FontSize: 38
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -2448,7 +2448,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 9f3d105335c545947a9cbc70dd0de931, type: 3}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10

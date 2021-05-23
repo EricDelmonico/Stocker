@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GroceryLevel.unity
     guid: 40d06fc9bc8c4f44d8913d4dbf8284c3
+  - enabled: 1
+    path: Assets/Scenes/Menus/Tutorial.unity
+    guid: b44ab7c304f915c4b88f7154e208c12c
   m_configObjects: {}

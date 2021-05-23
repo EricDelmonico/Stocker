@@ -16,6 +16,8 @@ public class MainMenuUIManager : UIManagerBase
 
         warningPanel.SetActive(true);
         StartCoroutine(HideWarning());
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame
