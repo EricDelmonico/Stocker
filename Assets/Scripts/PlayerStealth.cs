@@ -6,6 +6,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class PlayerStealth : MonoBehaviour
 {
     public static bool running = false;
+    public static bool walking = false;
 
     [SerializeField]
     private GameObject playerCam;
@@ -40,6 +41,9 @@ public class PlayerStealth : MonoBehaviour
     [SerializeField]
     private Vector3 lowestdsPos;
     private Vector3 initialdsPos;
+
+    [SerializeField]
+    private Transform flashlightParent;
 
     private Vector3 lowestCamPos;
     private Vector3 initialCamPos;
@@ -77,6 +81,19 @@ public class PlayerStealth : MonoBehaviour
             Stand();
         }
 
+        if ((Input.GetKey(KeyCode.W) ||
+            Input.GetKey(KeyCode.A) ||
+            Input.GetKey(KeyCode.S) ||
+            Input.GetKey(KeyCode.D)) 
+            && !Input.GetKey(KeyCode.LeftControl))
+        {
+            walking = true;
+        }
+        else
+        {
+            walking = false;
+        }
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             running = true;
@@ -88,6 +105,7 @@ public class PlayerStealth : MonoBehaviour
 
         detectionSphere.transform.localPosition = EaseLerp.Lerp(initialdsPos, lowestdsPos, CrouchLerpClamped);
         playerCam.transform.localPosition = EaseLerp.Lerp(initialCamPos, lowestCamPos, CrouchLerpClamped);
+        flashlightParent.position = Camera.main.transform.position - new Vector3(0, -.2f, 0) + Camera.main.transform.right / 1.6f;
     }
 
     private void Crouch()

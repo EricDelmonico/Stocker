@@ -13,6 +13,10 @@ TagManager:
   - Detection
   - Banana
   - Pork
+  - DropSpotBanana
+  - DropSpotPork
+  - DropSpotGum
+  - Gum
   layers:
   - Default
   - TransparentFX

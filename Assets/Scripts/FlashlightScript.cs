@@ -7,11 +7,21 @@ public class FlashlightScript : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 5;
 
+    [SerializeField] 
+    private Light flashlightLight;
+    [SerializeField] 
+    private Light pointLight;
+
     // Update is called once per frame
     void Update()
     {
         transform.forward += (Camera.main.transform.forward - transform.forward) * Time.deltaTime * moveSpeed;
-        transform.parent.position = Camera.main.transform.position - new Vector3(0, -.2f, 0) + Camera.main.transform.right / 1.6f;
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            flashlightLight.enabled = !flashlightLight.enabled;
+            pointLight.enabled = !pointLight.enabled;
+        }
     }
 }
 
