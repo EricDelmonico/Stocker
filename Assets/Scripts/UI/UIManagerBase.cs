@@ -28,4 +28,10 @@ public class UIManagerBase : MonoBehaviour
     //Play game
     public void Play() => SceneManager.LoadScene(1);
 
+    //Tutorial
+    public void Tutorial() => SceneManager.LoadScene(2);
+
+    //Quit game
+    public void Quit() => Application.Quit();
+
 }
