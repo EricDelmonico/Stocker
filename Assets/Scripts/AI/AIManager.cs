@@ -23,6 +23,11 @@ public class AIManager : MonoBehaviour
     //Conditions
     bool playerSpotted;
 
+    //Waypoints
+    public GameObject[] produceWP;
+    public GameObject[] meatWP;
+    public GameObject[] aisleWP;
+
     // Start is called before the first frame update
     void Start()
     {
