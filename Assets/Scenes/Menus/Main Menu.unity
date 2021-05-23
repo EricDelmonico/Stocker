@@ -710,6 +710,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -804731622281664130, guid: 72b1f906d85f6f74ca693558bdfc1773, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6538a8999c21e04429ae84df7d4b73fb, type: 2}
+    - target: {fileID: -678588488315902003, guid: 72b1f906d85f6f74ca693558bdfc1773, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6538a8999c21e04429ae84df7d4b73fb, type: 2}
     - target: {fileID: 919132149155446097, guid: 72b1f906d85f6f74ca693558bdfc1773, type: 3}
       propertyPath: m_Name
       value: CashRegister
@@ -1031,7 +1039,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
+    m_NormalColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1893,7 +1901,7 @@ MonoBehaviour:
     may cause discomfort and/or seizures for those with photosensitive epilepsy.
 
     Viewer
-    disscretion is adivsed.'
+    discretion is advised.'
 --- !u!222 &1244362096
 CanvasRenderer:
   m_ObjectHideFlags: 0
