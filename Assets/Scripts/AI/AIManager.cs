@@ -111,7 +111,16 @@ public class AIManager : MonoBehaviour
         }
 
         //Triggers the animator
-        if (playerSpotted)
+
+        if (Gum.dropped)
+        {
+            if (!managerAnimator.GetBool("PlayerSpotted") && !jaredSource.isPlaying)
+            {
+                managerAnimator.SetBool("PlayerSpotted", true);
+                PlaySound(Sounds.Chase);
+            }
+        }
+        else if (playerSpotted)
         {
             if (!managerAnimator.GetBool("PlayerSpotted") && !jaredSource.isPlaying)
             {
