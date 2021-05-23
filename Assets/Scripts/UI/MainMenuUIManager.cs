@@ -12,6 +12,8 @@ public class MainMenuUIManager : UIManagerBase
     {
         base.Start();
 
+        blackPanel.SetActive(true);
+
         warningPanel.SetActive(true);
         StartCoroutine(HideWarning());
     }
@@ -30,4 +32,21 @@ public class MainMenuUIManager : UIManagerBase
         warningPanel.SetActive(false);
         FadeIn();
     }
+
+    public void TransitionToPlay()
+    {
+        blackPanelAnim.SetBool("FadeOut", true);
+
+        while (true)
+        {
+            if (blackPanelAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !blackPanelAnim.IsInTransition(0))
+            {
+                Play();
+                break;
+            }
+
+        }
+
+    }
+        
 }
