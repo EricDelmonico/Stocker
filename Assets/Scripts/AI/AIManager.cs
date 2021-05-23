@@ -8,7 +8,8 @@ public enum Sounds
     Chase,
     Search,
     Patrol,
-    Hear
+    Hear,
+    Found
 }
 
 public class AIManager : MonoBehaviour
@@ -32,7 +33,7 @@ public class AIManager : MonoBehaviour
     bool playerSpotted;
 
     // AudioSource
-    private AudioSource jaredSource;
+    public AudioSource jaredSource;
 
     //Waypoints
     public GameObject[] produceWP;
@@ -70,7 +71,8 @@ public class AIManager : MonoBehaviour
             { Sounds.Chase, chaseSounds },
             { Sounds.Hear, hearSounds },
             { Sounds.Patrol, patrolSounds },
-            { Sounds.Search, searchSounds }
+            { Sounds.Search, searchSounds },
+            { Sounds.Found, gameOverSounds }
         };
     }
 
@@ -111,7 +113,7 @@ public class AIManager : MonoBehaviour
         //Triggers the animator
         if (playerSpotted)
         {
-            if (!managerAnimator.GetBool("PlayerSpotted"))
+            if (!managerAnimator.GetBool("PlayerSpotted") && !jaredSource.isPlaying)
             {
                 managerAnimator.SetBool("PlayerSpotted", true);
                 PlaySound(Sounds.Chase);
@@ -120,7 +122,7 @@ public class AIManager : MonoBehaviour
         else if ( PlayerStealth.running || 
             (PlayerStealth.walking && Vector3.Distance(transform.position, playerPos.position) < hearingRange))
         {
-            if (!managerAnimator.GetBool("PlayerSpotted"))
+            if (!managerAnimator.GetBool("PlayerSpotted") && !jaredSource.isPlaying)
             {
                 managerAnimator.SetBool("PlayerSpotted", true);
                 PlaySound(Sounds.Hear);
@@ -134,13 +136,24 @@ public class AIManager : MonoBehaviour
 
     public void PlaySound(Sounds sound)
     {
-        var soundsBank = allSounds[sound];
-        jaredSource.PlayOneShot(soundsBank[Random.Range(0, soundsBank.Length)]);
+        if (!lockSounds)
+        {
+            jaredSource.Stop();
+            var soundsBank = allSounds[sound];
+            jaredSource.PlayOneShot(soundsBank[Random.Range(0, soundsBank.Length)]);
+        }
+    }
+
+    private bool lockSounds = false;
+    public void LockSounds()
+    {
+        lockSounds = true;
     }
 
     public IEnumerator PlayPatrolSoundsPeriodically()
     {
         PlaySound(Sounds.Patrol);
         yield return new WaitForSeconds(secondsBetweenPatrolSounds);
+        StartCoroutine(PlayPatrolSoundsPeriodically());
     }
 }
