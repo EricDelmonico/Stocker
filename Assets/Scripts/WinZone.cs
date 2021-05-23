@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinZone : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class WinZone : MonoBehaviour
     {
         if (other.CompareTag("Detection"))
         {
-            Debug.Log("Epic fortnite victory royale");
+            SceneManager.LoadScene("WinScreen");
         }
     }
 }
