@@ -469,10 +469,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63816f86d960b6a4eb1781a5d1cfc34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWaitTime: 4
-  minWaitTime: 6
-  maxFlickerTime: 0.01
-  minFlickerTime: 0.2
+  maxWaitTime: 6
+  minWaitTime: 4
+  maxFlickerTime: 0.2
+  minFlickerTime: 0.01
   leftEye: {fileID: 1711916345}
   rightEye: {fileID: 199319613}
 --- !u!108 &140523935
