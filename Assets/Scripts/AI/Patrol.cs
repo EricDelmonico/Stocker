@@ -39,9 +39,9 @@ public class Patrol : StateMachineBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        wayPointsProduce = GameObject.FindGameObjectsWithTag("WPProduce");
-        wayPointsMeat = GameObject.FindGameObjectsWithTag("WPMeat");
-        wayPointsAisle = GameObject.FindGameObjectsWithTag("WPAisle");
+        //wayPointsProduce = GameObject.FindGameObjectsWithTag("WPProduce");
+        //wayPointsMeat = GameObject.FindGameObjectsWithTag("WPMeat");
+        //wayPointsAisle = GameObject.FindGameObjectsWithTag("WPAisle");
 
         currentWP = 0;
 
@@ -54,6 +54,12 @@ public class Patrol : StateMachineBehaviour
         manager = animator.gameObject;
 
         managerManager = manager.GetComponent<AIManager>();
+
+        wayPointsProduce = managerManager.produceWP;
+        wayPointsMeat = managerManager.meatWP;
+        wayPointsAisle = managerManager.aisleWP;
+
+        CheckItems();
 
         //Assigns the waypoints based on which section the player is in.
         switch (currentSection)
