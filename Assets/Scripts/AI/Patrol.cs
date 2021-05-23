@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum MapSections 
+{ 
+    Produce = 1,
+    Meat = 2,
+    Aisle = 4
+}
+
 public class Patrol : StateMachineBehaviour
 {
     GameObject manager;
@@ -18,7 +25,7 @@ public class Patrol : StateMachineBehaviour
 
 
     //What section the player is in
-    int currentSection = 0;
+    MapSections currentSection;
     GameObject[] currentSetOfWP;
 
     //Current waypoint
@@ -37,6 +44,8 @@ public class Patrol : StateMachineBehaviour
         wayPointsAisle = GameObject.FindGameObjectsWithTag("WPAisle");
 
         currentWP = 0;
+
+        currentSection = MapSections.Produce;
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -49,15 +58,15 @@ public class Patrol : StateMachineBehaviour
         //Assigns the waypoints based on which section the player is in.
         switch (currentSection)
         {
-            case 0:
+            case MapSections.Produce:
                 currentSetOfWP = wayPointsProduce;
                 break;
 
-            case 1:
+            case MapSections.Meat:
                 currentSetOfWP = wayPointsMeat;
                 break;
 
-            case 2:
+            case MapSections.Aisle:
                 currentSetOfWP = wayPointsAisle;
                 break;
         }
@@ -75,6 +84,8 @@ public class Patrol : StateMachineBehaviour
         //Skip if there's no way points
         if (currentSetOfWP.Length == 0)
             return;
+
+        CheckItems();
 
         //Transition to the next way point
         if(Vector3.Distance(currentSetOfWP[currentWP].transform.position, manager.transform.position) < 3.0f)
@@ -100,6 +111,22 @@ public class Patrol : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
+    }
+
+    private void CheckItems()
+    {
+        if (Banana.dropped && currentSection == MapSections.Produce)
+        {
+            currentSection = MapSections.Meat;
+            currentSetOfWP = wayPointsMeat;
+            currentWP = 0;
+        }
+        if (Pork.dropped && currentSection == MapSections.Meat)
+        {
+            currentSection = MapSections.Aisle;
+            currentSetOfWP = wayPointsAisle;
+            currentWP = 0;
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

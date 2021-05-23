@@ -14,7 +14,9 @@ public class PlayerInteract : MonoBehaviour
 
     public static readonly string[] holdableTags = 
     {
-        "Test"
+        "Banana",
+        "Pork",
+        "Gum"
     };
 
     void Update()
@@ -57,6 +59,7 @@ public class PlayerInteract : MonoBehaviour
     {
         ToggleActive(heldItem);
         heldItem.transform.position = dropSpot;
+        heldItem.GetComponent<Item>().DropItem();
         heldItem = null;
     }
 

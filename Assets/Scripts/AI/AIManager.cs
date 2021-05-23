@@ -13,6 +13,10 @@ public class AIManager : MonoBehaviour
     Transform playerPos;
     MeshRenderer playerMesh;
 
+    public Camera cam;
+
+    public float hearingRange;
+
     //Animator
     Animator managerAnimator;
 
@@ -38,25 +42,35 @@ public class AIManager : MonoBehaviour
     void Update()
     {
         //Checks if the manager can see the player
-        if (playerMesh.isVisible)
+        Vector3 viewportPos = cam.WorldToViewportPoint(player.transform.position);
+        if (viewportPos.x < 1 && viewportPos.x > 0
+            && viewportPos.y < 1 && viewportPos.y > 0
+            && viewportPos.z > 0)
         {
             Debug.DrawRay(transform.position, playerPos.position - transform.position, Color.red);
 
             RaycastHit hit;
             if(Physics.Raycast(transform.position, playerPos.position - transform.position, out hit))
             {
-
                 if(hit.collider.CompareTag("Detection"))
                 {
                     playerSpotted = true;
                 }
+                else
+                {
+                    playerSpotted = false;
+                }
             }
-
-            
+        }
+        else
+        {
+            playerSpotted = false;
         }
 
         //Triggers the animator
-        if (playerSpotted || PlayerStealth.running)
+        if (playerSpotted || 
+            PlayerStealth.running || 
+            (PlayerStealth.walking && Vector3.Distance(transform.position, playerPos.position) < hearingRange))
             managerAnimator.SetBool("PlayerSpotted", true);
         else
             managerAnimator.SetBool("PlayerSpotted", false);
